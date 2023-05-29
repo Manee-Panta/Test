@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.14.2
+          
+      - name: GitHub Action for Npm
+        uses: borales/actions-npm@v2
+        with:
+             cmd: install
+
+      
+      - name: Build
+        run: npm run build
+        
+      - name: installing surge
+        run: npm install -g surge
+         
+      
+      - name: Deploy to Surge
+        run: surge --project ./build http://striped-nest.surge.sh/
