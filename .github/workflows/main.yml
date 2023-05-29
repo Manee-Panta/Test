@@ -19,9 +19,12 @@ jobs:
           node-version: 16.14.2
           
       - name: GitHub Action for Npm
-        uses: borales/actions-npm@v2
+        uses: actions/setup-node@v2
         with:
-             cmd: install
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
 
       
       - name: Build
